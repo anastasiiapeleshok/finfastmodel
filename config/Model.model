@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<ns3:modelConfig xsi:type="ns3:ModelConfig" folder="" productionMode="false" keepOpen="true" pauseCalculations="false" entityCode="640" loadPath="FinFastModel1(3)" entityName="Fin Fast Model 1 (3)" version="1761" name="Fin Fast Model 1 (3)" icon="counterparty.png" created="2022-09-22T14:04:21.360-04:00" createdBy="regional" lastUpdated="2025-02-03T11:32:54.887+02:00" lastUpdatedBy="admin" id="admin:MODEL:FinFastModel1(3)" xmlns:ns6="http://www.modelshop.com/services/account/types" xmlns:ns5="http://www.modelshop.com/datacore/message/types" xmlns:ns8="http://www.modelshop.com/datacore/generator/types" xmlns:ns7="http://www.modelshop.com/datacore/repository/types" xmlns:ns2="http://www.modelshop.com/datacore/view/types" xmlns:ns4="http://www.modelshop.com/services/model/types" xmlns:ns3="http://www.modelshop.com/model/model/types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <dashboardGroups version="1695" name="Payroll Dash" description="" created="2024-01-21T20:57:57.015-05:00" createdBy="regional" lastUpdated="2024-10-22T16:44:22.020+03:00" lastUpdatedBy="admin" id="Payroll Dash">
+        <dashboards locked="true" entityName="Employees" version="755" name="Payroll Dash:Payroll History" id="Payroll Dash:Payroll History">
+            <referenceSelectors entityName="Employees" selectField="Title" viewName="Employees" prompt="Select Employees"/>
+        </dashboards>
+    </dashboardGroups>
+    <charts entityName="Employees" version="1744" name="Employees Chart" description="" created="2024-06-20T07:40:30.044-04:00" createdBy="regional" lastUpdated="2024-11-28T11:37:07.760+02:00" lastUpdatedBy="admin" id="Employees Chart"/>
+    <datalists entityCode="641" entityName="Company" version="1760" publish="true" name="Company" position="1" created="2022-11-21T21:40:21.267-05:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Company">
+        <dataFields type="text" fieldCode="100" rawType="java.lang.String" keyField="true" indexed="true" name="Company Name" nodeName="Company.companyName" itemType="datalist" itemName="Company" componentType="field" position="1" initialized="true" lastUpdated="2024-10-18T13:32:59.063+03:00" lastUpdatedBy="admin" id="Company Name"/>
+        <dataFields type="float" format="0%" fieldCode="107" rawType="java.lang.Double" name="Percent Crooks" nodeName="Company.percentCrooks" itemType="datalist" itemName="Company" componentType="field" position="2" initialized="true" lastUpdated="2024-10-18T13:32:59.065+03:00" lastUpdatedBy="admin" id="Percent Crooks">
+            <onError source="null" codeBlock="false"/>
+            <calculation>
+                <expression source="departmentsList.sum{it.employeesList.count{it.ruleResults.any{it.ruleName.contains(&quot;thief&quot;)}}} / departmentsList.sum{it.numActiveEmp}" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="101" rawType="java.lang.String" name="Company Industry" nodeName="Company.companyIndustry" itemType="datalist" itemName="Company" componentType="field" position="3" initialized="true" lastUpdated="2024-10-18T13:32:59.065+03:00" lastUpdatedBy="admin" id="Company Industry"/>
+        <dataFields fieldCode="108" rawType="java.lang.Object" name="Foo" initialized="true" lastUpdated="2024-10-18T13:32:59.065+03:00" lastUpdatedBy="admin" id="Foo"/>
+        <dataFields type="integer" fieldCode="102" rawType="java.lang.Long" name="Total Active Employees" nodeName="Company.totalActiveEmployees" itemType="datalist" itemName="Company" componentType="field" position="4" initialized="true" lastUpdated="2024-10-18T13:32:59.066+03:00" lastUpdatedBy="admin" id="Total Active Employees">
+            <calculation id="9cb71901-6351-4b7f-a123-d64d55324b4a">
+                <expression source="departmentsList.sum{it.numActiveEmp}" codeBlock="false" id="a6f7d9f6-6684-480c-aa16-eceae64da0c8"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="103" rawType="java.math.BigDecimal" name="Total Tenured Revenue" nodeName="Company.totalTenuredRevenue" itemType="datalist" itemName="Company" componentType="field" position="5" initialized="true" lastUpdated="2024-10-18T13:32:59.066+03:00" lastUpdatedBy="admin" id="Total Tenured Revenue">
+            <calculation id="d73ab607-93fd-4684-be83-d58b01636b22">
+                <expression source="departmentsList.sum{it.salaryGreaterManagerTenure}" codeBlock="false" id="98ac978c-4857-4b54-9aa9-384cda8ad68c"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="104" rawType="java.math.BigDecimal" name="Top Managers Salary" nodeName="Company.topManagersSalary" itemType="datalist" itemName="Company" componentType="field" position="6" initialized="true" lastUpdated="2024-10-18T13:32:59.066+03:00" lastUpdatedBy="admin" id="Top Managers Salary">
+            <calculation id="d074cd38-64a8-47a7-a2a2-f465f7ac31fd">
+                <expression source="departmentsList.collect{it.employeesList.find{it.isManager}.salary}.max()" codeBlock="false" id="63cb5825-c443-46ac-9351-08ec7fb5c977"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="float" format="0.0%" fieldCode="105" rawType="java.lang.Double" name="Top Salary Vs Average" nodeName="Company.topSalaryVsAverage" itemType="datalist" itemName="Company" componentType="field" position="7" initialized="true" lastUpdated="2024-10-18T13:32:59.066+03:00" lastUpdatedBy="admin" id="Top Salary Vs Average">
+            <calculation id="a3063294-1c76-453d-890c-6fff4b3ff237">
+                <expression source="topManagersSalary / model.employeesList.salary.average()" compile="false" codeBlock="false" id="d164f389-0af5-4c63-ba19-a238a7f1d62f"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="float" fieldCode="106" rawType="java.lang.Double" name="Top Salary Vs Top Tenure" nodeName="Company.topSalaryVsTopTenure" itemType="datalist" itemName="Company" componentType="field" position="8" initialized="true" lastUpdated="2024-10-18T13:32:59.067+03:00" lastUpdatedBy="admin" id="Top Salary Vs Top Tenure">
+            <calculation id="3547c5ca-32ed-4ca3-9c69-4b00cfd24f7c">
+                <expression source="topManagersSalary / model.employeesList.yearsTenure.max()" compile="false" codeBlock="false" id="020a0110-81ee-411a-b56f-b6bab34532b7"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="float" format="0.0%" fieldCode="105" rawType="java.lang.Double" name="Top Salary Vs Max" nodeName="Company.topSalaryVsMax" itemType="datalist" itemName="Company" componentType="field" position="9" initialized="true" lastUpdated="2024-10-18T13:32:59.067+03:00" lastUpdatedBy="admin" id="Top Salary Vs Max">
+            <calculation id="81313f8a-b1d1-4b36-b1d1-8deb35a1f603">
+                <expression source="topManagersSalary / model.employeesList.salary.max()" compile="false" codeBlock="false" id="7423fab6-a2fb-4343-8975-f1e750cac915"/>
+            </calculation>
+        </dataFields>
+    </datalists>
+    <datalists entityCode="643" entityName="Employees" version="1760" publish="true" name="Employees" position="3" created="2022-11-21T21:40:21.267-05:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Employees">
+        <dataFields type="text" fieldCode="110" rawType="java.lang.String" allowNull="true" keyField="true" indexed="true" name="Name" position="1" initialized="true" lastUpdated="2024-10-18T13:32:59.072+03:00" lastUpdatedBy="admin" id="Name">
+            <calculation id="a7d51291-ff41-4fc8-a992-e4ad23db5cb7">
+                <expression source="lastName + &quot;, &quot; + firstName" codeBlock="false" id="1b7eccf5-7f50-4309-82ff-aee95fa819ac"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="118" rawType="java.lang.Long" name="Employee Id" position="2" initialized="true" lastUpdated="2024-10-18T13:32:59.072+03:00" lastUpdatedBy="admin" id="Employee Id">
+            <calculation id="f7670ec5-b65a-4c22-b768-24a984c7f984">
+                <expression source="2000 + id" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="128" rawType="java.lang.String" name="Company" position="3" initialized="true" lastUpdated="2024-10-18T13:32:59.072+03:00" lastUpdatedBy="admin" id="Company">
+            <calculation>
+                <expression source="deptLink?.company" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="119" rawType="java.lang.String" name="Company Industry" position="4" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Company Industry">
+            <calculation id="e8933d5b-81c6-4064-a16d-ebede2fc704d">
+                <expression source="deptLink?.company?.companyIndustry" codeBlock="false" id="3853d9eb-3ed4-426b-9fcc-35198a8b4373"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="120" rawType="java.lang.String" name="Employment Status" position="5" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Employment Status">
+            <calculation id="b310b09a-f09a-41c0-b68a-7c4544018679">
+                <expression source="companyIndustry?.contains(&quot;Stealing&quot;) ? &quot;Active&quot; : &quot;Obsolete&quot;" codeBlock="false" id="d19d6e46-1045-4101-8209-1086cf92be6e"/>
+            </calculation>
+            <infoText>
+                <lookupValues>Active</lookupValues>
+                <lookupValues>Inactive</lookupValues>
+                <lookupValues>Obsolete</lookupValues>
+            </infoText>
+        </dataFields>
+        <dataFields type="text" fieldCode="100" rawType="java.lang.String" allowNull="true" name="Last Name" position="6" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Last Name"/>
+        <dataFields type="text" fieldCode="101" rawType="java.lang.String" allowNull="true" name="First Name" position="7" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="First Name"/>
+        <dataFields type="date" fieldCode="104" rawType="com.modelshop.datacore.datatype.Date" allowNull="true" name="HireDate" color="lastName==&quot;Vogt&quot; ? Color.GREEN : null" position="8" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="HireDate"/>
+        <dataFields type="dataitem" fieldCode="102" rawType="Title" allowNull="true" multiIndex="true" name="Title" position="9" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Title">
+            <infoDataItem entityClass="Title" view="Title" selectField="Title" createIfMissing="true" invalid="false" id="31c96fcf-8833-45b6-a3fb-eb6b002a9e53"/>
+        </dataFields>
+        <dataFields type="integer" fieldCode="103" rawType="java.lang.Long" allowNull="true" multiIndex="true" name="DeptCode" position="10" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="DeptCode"/>
+        <dataFields type="dataitem" fieldCode="121" rawType="Departments" multiIndex="true" name="DeptLink" position="11" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="DeptLink">
+            <calculation id="cb421206-eb9d-46f5-8ff8-1206ef0e6cad">
+                <expression source="deptCode" codeBlock="false" id="d3d2a999-bc39-4015-b135-0d8d27754201"/>
+            </calculation>
+            <infoDataItem entityClass="Departments" view="Departments" selectField="Code" ignoreIfMissing="true" invalid="false" id="766f817b-9277-4b25-8354-e6c5a0ee5f1a"/>
+        </dataFields>
+        <dataFields type="text" fieldCode="108" rawType="java.lang.String" allowNull="true" name="Department" position="12" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Department">
+            <calculation id="29bced4f-0c9a-4ee2-bedf-c883ec3e3c0a">
+                <expression source="deptLink?.deptName" codeBlock="false" id="86468be6-8dc5-498f-965c-9c5e0ea9414c"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="boolean" fieldCode="123" rawType="java.lang.Boolean" name="Is Manager Old" position="13" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Is Manager Old">
+            <calculation id="12e90eaa-4885-4916-bd3f-e5c23e0b1553">
+                <expression source="manager?.hireDate?.ageYears() &gt; 18" codeBlock="false" id="93cf03ab-b06a-4556-a8a6-53602082dc1c"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="dataitem" fieldCode="109" rawType="Employees" allowNull="true" multiIndex="true" name="Manager" position="14" initialized="true" lastUpdated="2024-10-18T13:32:59.073+03:00" lastUpdatedBy="admin" id="Manager">
+            <infoDataItem entityClass="Employees" view="Employees" selectField="Name" invalid="false" id="1d7ee977-a78a-4655-8c05-03e61bd364a1"/>
+        </dataFields>
+        <dataFields type="boolean" fieldCode="122" rawType="java.lang.Boolean" name="Is Manager" position="15" initialized="true" lastUpdated="2024-10-18T13:32:59.074+03:00" lastUpdatedBy="admin" id="Is Manager">
+            <calculation id="2863d9ae-a139-49cc-aa8f-36350cc84a85">
+                <expression source="!departmentsByDeptManager.empty" codeBlock="false" id="d971606f-2ebe-4200-a873-aad9ab2d93ee"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="126" rawType="java.lang.Long" name="Num Employees" position="16" initialized="true" lastUpdated="2024-10-18T13:32:59.074+03:00" lastUpdatedBy="admin" id="Num Employees">
+            <calculation>
+                <expression source="employeesList.size()" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="boolean" fieldCode="125" rawType="java.lang.Boolean" name="Overpaid" position="17" initialized="true" lastUpdated="2024-10-18T13:32:59.074+03:00" lastUpdatedBy="admin" id="Overpaid">
+            <calculation id="30342c8d-b82b-488c-b845-e08d33a58a87">
+                <expression source="deptLink!=null &amp;&amp; deptLink.deptManager.salary &lt; salary " codeBlock="false" id="3794cd92-8b39-4c34-86bc-ac27395e01c5"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="106" rawType="java.lang.String" allowNull="true" name="Phone" position="18" initialized="true" lastUpdated="2024-10-18T13:32:59.074+03:00" lastUpdatedBy="admin" id="Phone"/>
+        <dataFields type="text" fieldCode="107" rawType="java.lang.String" allowNull="true" name="eMail" position="19" initialized="true" lastUpdated="2024-10-18T13:32:59.074+03:00" lastUpdatedBy="admin" id="eMail"/>
+        <dataFields type="float" format="0.0" fieldCode="111" rawType="java.lang.Double" allowNull="true" name="YearsTenure" position="20" initialized="true" lastUpdated="2024-10-18T13:32:59.074+03:00" lastUpdatedBy="admin" id="YearsTenure">
+            <calculation id="ff9b8ef1-24f7-444d-864c-1b366cc8354b">
+                <expression source="hireDate?.ageYears() - 10" codeBlock="false" id="c8baa279-1f58-465b-bcb7-00ab16b3c623"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="115" rawType="java.math.BigDecimal" allowNull="true" name="Salary Bin" position="21" initialized="true" lastUpdated="2024-10-18T13:32:59.075+03:00" lastUpdatedBy="admin" id="Salary Bin">
+            <calculation id="c281e6bc-faf6-4dd3-929b-60f1a544beb8">
+                <expression source="Stats.binFixed(salary, 10000)" codeBlock="false" id="4958ebef-7a39-4a06-b040-ccbda80b7b31"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="116" readOnly="true" rawType="java.lang.String" name="sourceName" description="Source name" position="22" initialized="true" lastUpdated="2024-10-18T13:32:59.075+03:00" lastUpdatedBy="admin" id="sourceName">
+            <defaultValue source="'Manual Entry'"/>
+        </dataFields>
+        <dataFields type="integer" fieldCode="117" readOnly="true" rawType="java.lang.Long" name="lineNumber" description="Source line number" position="23" initialized="true" lastUpdated="2024-10-18T13:32:59.075+03:00" lastUpdatedBy="admin" id="lineNumber">
+            <defaultValue source="id"/>
+        </dataFields>
+        <dataFields type="text" fieldCode="127" rawType="java.lang.String" name="Onboarding Status" description="Generated status field for Decision Flow Employee Onboarding" position="24" initialized="true" lastUpdated="2024-10-18T13:32:59.075+03:00" lastUpdatedBy="admin" id="Onboarding Status"/>
+        <dataFields type="currency" fieldCode="105" rawType="java.math.BigDecimal" allowNull="true" name="Salary" position="25" initialized="true" lastUpdated="2024-10-18T13:32:59.075+03:00" lastUpdatedBy="admin" id="Salary"/>
+    </datalists>
+    <datalists entityCode="644" entityName="Departments" version="1759" publish="true" config="true" name="Departments" position="2" dirty="true" created="2022-11-21T21:40:21.267-05:00" createdBy="regional" lastUpdated="2025-02-03T11:32:54.887+02:00" lastUpdatedBy="admin" id="Departments">
+        <dataFields type="integer" fieldCode="100" rawType="java.lang.Long" allowNull="true" indexed="true" name="Code" position="1" initialized="true" lastUpdated="2024-10-18T13:32:59.076+03:00" lastUpdatedBy="admin" id="Code"/>
+        <dataFields type="integer" fieldCode="120" rawType="java.lang.Long" name="Random Foo" position="2" initialized="true" lastUpdated="2024-10-18T13:32:59.076+03:00" lastUpdatedBy="admin" id="Random Foo">
+            <calculation>
+                <expression source="random + 1000" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="119" rawType="java.lang.Long" name="Random" description="A random field" color="Color.colorBar(Color.BLUE, random/100)" position="3" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="Random">
+            <calculation>
+                <expression source="Random.randomBetweenInt(0, 99)" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="decimal" fieldCode="122" rawType="java.math.BigDecimal" name="FooBar" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="FooBar">
+            <onError source="null" codeBlock="false"/>
+            <calculation>
+                <expression source="randomFoo / random" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="104" rawType="java.lang.Long" allowNull="true" name="NumActiveEmp" description="Number of employees" position="4" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="NumActiveEmp">
+            <calculation id="d5d89b96-21b4-4d59-949c-aa0663a783e0">
+                <expression source="employeesList.count{it.employmentStatus==&quot;Active&quot;}" codeBlock="false" id="b0510f3a-60e9-4f30-b5b5-271062db6d7c"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="text" fieldCode="102" rawType="java.lang.String" allowNull="true" name="Location" description="A location field" position="5" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="Location"/>
+        <dataFields type="dataitem" fieldCode="124" rawType="State" multiIndex="true" name="State" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="State">
+            <calculation>
+                <expression source="location.split(',')[1]" codeBlock="false"/>
+            </calculation>
+            <infoDataItem entityClass="State" view="State" selectField="State" createIfMissing="true" invalid="false"/>
+        </dataFields>
+        <dataFields type="text" fieldCode="101" rawType="java.lang.String" allowNull="true" keyField="true" indexed="true" name="DeptName" position="6" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="DeptName"/>
+        <dataFields type="dataitem" fieldCode="110" rawType="Company" multiIndex="true" name="Company" position="7" initialized="true" lastUpdated="2024-10-18T13:32:59.077+03:00" lastUpdatedBy="admin" id="Company">
+            <infoDataItem entityClass="Company" parent="true" view="Company" selectField="Company Name" createIfMissing="true" invalid="false" id="e223d34f-5248-492c-8720-d53d60cbba19"/>
+        </dataFields>
+        <dataFields type="dataitem" fieldCode="113" rawType="Employees" multiIndex="true" array="true" name="Employees" position="8" initialized="true" lastUpdated="2024-10-18T13:32:59.078+03:00" lastUpdatedBy="admin" id="Employees">
+            <calculation id="2eb24e26-7e6b-44cb-8002-ac254887c794">
+                <expression source="employeesList" codeBlock="false" id="0bf299f9-451c-4f95-9582-8490519fb773"/>
+            </calculation>
+            <infoDataItem entityClass="Employees" view="Employees" selectField="Name" invalid="false" id="5a0de255-7365-460d-a32a-6d1c993baedc"/>
+        </dataFields>
+        <dataFields type="dataitem" fieldCode="103" rawType="Employees" allowNull="true" multiIndex="true" name="DeptManager" position="9" initialized="true" lastUpdated="2024-10-18T13:32:59.084+03:00" lastUpdatedBy="admin" id="DeptManager">
+            <infoDataItem entityClass="Employees" view="Employees" selectField="Name" invalid="false" id="1cfe1528-f1de-49fa-83bf-1e8326280c2c"/>
+        </dataFields>
+        <dataFields type="integer" fieldCode="111" rawType="java.lang.Long" name="Managers Tenure" position="10" initialized="true" lastUpdated="2024-10-18T13:32:59.085+03:00" lastUpdatedBy="admin" id="Managers Tenure">
+            <calculation id="a7ba14ff-f81d-4238-8a80-4c091f596ece">
+                <expression source="deptManager?.yearsTenure" codeBlock="false" id="fdc087ea-fb9c-4f91-b8a5-11fbcf98a2b8"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="105" rawType="java.math.BigDecimal" allowNull="true" name="Salary &lt; 5 years" position="11" initialized="true" lastUpdated="2024-10-18T13:32:59.086+03:00" lastUpdatedBy="admin" id="Salary &lt; 5 years">
+            <calculation id="d5e7cd4a-2b52-402b-819f-af8183d3fec1">
+                <expression source="employeesList.findAll{it.employmentStatus==&quot;Active&quot; &amp;&amp; it.yearsTenure &lt; 5}.sum{it.salary}" codeBlock="false" id="d15bba13-aff0-495a-8b4c-f56c119b4cf3"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="106" rawType="java.math.BigDecimal" allowNull="true" name="Salary 5-10 years" position="12" initialized="true" lastUpdated="2024-10-18T13:32:59.086+03:00" lastUpdatedBy="admin" id="Salary 5-10 years">
+            <calculation id="df4aba08-d8ed-41e0-8021-9be68cfe6ad0">
+                <expression source="employeesList.findAll{it.employmentStatus==&quot;Active&quot; &amp;&amp; it.yearsTenure &gt;= 5 &amp;&amp; it.yearsTenure &lt; 10}.sum{it.salary}" codeBlock="false" id="07cc2756-a2b9-4f58-a57e-4a1ff139cd4c"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="float" fieldCode="114" rawType="java.lang.Double" name="Manager to Average Employee Salary Ratio" position="13" initialized="true" lastUpdated="2024-10-18T13:32:59.086+03:00" lastUpdatedBy="admin" id="Manager to Average Employee Salary Ratio">
+            <calculation id="515849b3-523c-4338-9b58-0364c9ba82da">
+                <expression source="deptManager.salary / employees.average{it.salary}" compile="false" codeBlock="false" id="ab014896-e4bf-4cc1-98c9-ed08b25dd83a"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="dataitem" fieldCode="121" rawType="Goal" array="true" name="Goals" initialized="true" lastUpdated="2024-10-18T13:32:59.087+03:00" lastUpdatedBy="admin" id="Goals">
+            <infoDataItem entityClass="Goal" child="true" unique="true" view="Goal" selectField="Goal Name" invalid="false"/>
+        </dataFields>
+        <dataFields type="text" fieldCode="108" readOnly="true" rawType="java.lang.String" name="sourceName" description="Source name" position="14" initialized="true" lastUpdated="2024-10-18T13:32:59.087+03:00" lastUpdatedBy="admin" id="sourceName">
+            <defaultValue source="'Manual Entry'"/>
+        </dataFields>
+        <dataFields type="integer" fieldCode="109" readOnly="true" rawType="java.lang.Long" name="lineNumber" description="Source line number" position="15" initialized="true" lastUpdated="2024-10-18T13:32:59.087+03:00" lastUpdatedBy="admin" id="lineNumber">
+            <defaultValue source="id"/>
+        </dataFields>
+        <dataFields type="text" fieldCode="115" rawType="java.lang.String" array="true" name="Titles" position="16" initialized="true" lastUpdated="2024-10-18T13:32:59.087+03:00" lastUpdatedBy="admin" id="Titles">
+            <calculation>
+                <expression source="employeesList.collectUnique{it.title.title}" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="map" fieldCode="116" rawType="com.modelshop.datacore.datatype.MapRecord" name="Title Average Salary" position="17" initialized="true" lastUpdated="2024-10-18T13:32:59.089+03:00" lastUpdatedBy="admin" id="Title Average Salary">
+            <calculation>
+                <expression source="Maps.fromNameValue(titles, titles.collect{employeesList.findAll{e-&gt;e.title==it}.average{it.salary}})" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="statistic" fieldCode="117" rawType="com.modelshop.datacore.datatype.Fact" name="Salary Stats" position="18" initialized="true" lastUpdated="2024-10-18T13:32:59.090+03:00" lastUpdatedBy="admin" id="Salary Stats">
+            <calculation>
+                <expression source="employeesList.salary" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="107" rawType="java.math.BigDecimal" allowNull="true" name="Salary &gt; Manager Tenure" position="19" initialized="true" lastUpdated="2024-10-18T13:32:59.091+03:00" lastUpdatedBy="admin" id="Salary &gt; Manager Tenure">
+            <calculation id="5ea6de7c-dfc3-40b8-be56-8bc6e19b8423">
+                <expression source="employeesList.findAll{it.employmentStatus==&quot;Active&quot; &amp;&amp; managersTenure &lt; it.yearsTenure}.sum{it.salary}" codeBlock="false" id="35d68a7a-efd0-47d6-bb2d-d345c639b97e"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="112" rawType="java.math.BigDecimal" allowNull="true" name="Salary &gt; 10 years" position="20" initialized="true" lastUpdated="2024-10-18T13:32:59.091+03:00" lastUpdatedBy="admin" id="Salary &gt; 10 years"/>
+        <dataFields type="text" fieldCode="118" rawType="java.lang.String" name="Onboard Decision" description="Generated decision field for Decision Flow Departments Decision Flow" position="21" initialized="true" lastUpdated="2024-10-18T13:32:59.091+03:00" lastUpdatedBy="admin" id="Onboard Decision"/>
+        <dataFields type="text" fieldCode="123" rawType="java.lang.String" name="Want Field Here" initialized="true" lastUpdated="2024-10-18T13:32:59.091+03:00" lastUpdatedBy="admin" id="Want Field Here">
+            <calculation>
+                <expression source="&quot;Here I Am&quot;" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+    </datalists>
+    <datalists entityCode="645" entityName="Roles" version="1760" name="Roles" created="2022-11-21T21:40:21.267-05:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Roles">
+        <dataFields type="multikey" fieldCode="100" rawType="com.modelshop.datacore.datatype.MultiKey" keyField="true" name="Index" initialized="true" lastUpdated="2024-10-18T13:32:59.068+03:00" lastUpdatedBy="admin" id="Index"/>
+        <dataFields type="dataitem" fieldCode="101" rawType="Departments" multiIndex="true" name="Department" initialized="true" lastUpdated="2024-10-18T13:32:59.068+03:00" lastUpdatedBy="admin" id="Department">
+            <calculation id="d026257f-6dc6-4029-8b7c-f3e90566e9a5">
+                <expression source="index[0]" codeBlock="false" id="1cc576f4-b761-4950-acd8-ef93b61c0737"/>
+            </calculation>
+            <infoDataItem entityClass="Departments" view="Departments" selectField="DeptName" invalid="false" id="4bff5e6c-fecb-43c1-bdb6-d96e01ca1e3e"/>
+        </dataFields>
+        <dataFields type="dataitem" fieldCode="102" rawType="Title" multiIndex="true" name="Role" initialized="true" lastUpdated="2024-10-18T13:32:59.069+03:00" lastUpdatedBy="admin" id="Role">
+            <calculation id="c37590a0-552a-4208-9743-063b6a146e69">
+                <expression source="index[1]" codeBlock="false" id="2152d06d-17f4-4b85-9912-18c0e1aa4ae9"/>
+            </calculation>
+            <infoDataItem entityClass="Title" view="Title" selectField="Title" invalid="false" id="01a3454b-404c-42e6-b220-f80752dbab89"/>
+        </dataFields>
+        <dataFields type="dataitem" fieldCode="105" rawType="Employees" multiIndex="true" array="true" name="Employees" initialized="true" lastUpdated="2024-10-18T13:32:59.069+03:00" lastUpdatedBy="admin" id="Employees">
+            <calculation id="6b96eee6-24f0-4a12-b2fd-4d4018bbcac1">
+                <expression source="role.employeesList.findAll{it.department==department.deptName}" codeBlock="false" id="f35d0689-9a93-4f1c-9263-8fb5f2c04a8b"/>
+            </calculation>
+            <infoDataItem entityClass="Employees" view="Employees" selectField="Name" invalid="false" id="8cedd091-3d03-4327-ae2b-60d90e63e497"/>
+        </dataFields>
+        <dataFields type="integer" fieldCode="106" rawType="java.lang.Long" array="true" name="Employees Ids" initialized="true" lastUpdated="2024-10-18T13:32:59.069+03:00" lastUpdatedBy="admin" id="Employees Ids">
+            <calculation>
+                <expression source="employees.employeeId" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="103" rawType="java.lang.Long" name="Role Count" initialized="true" lastUpdated="2024-10-18T13:32:59.071+03:00" lastUpdatedBy="admin" id="Role Count">
+            <calculation id="678cc6e0-f6c8-42ed-946a-6fc13700eafd">
+                <expression source="employees.size()" codeBlock="false" id="c05c6d7a-d32e-4ca8-91b8-fdd698e12afe"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="104" rawType="java.math.BigDecimal" name="Average Salary" initialized="true" lastUpdated="2024-10-18T13:32:59.071+03:00" lastUpdatedBy="admin" id="Average Salary">
+            <calculation id="b9151b98-acf3-4cf0-8e89-a9e040995a75">
+                <expression source="employees.average{it.salary}" compile="false" codeBlock="false" id="7b3b3c05-022f-4986-b497-8d422bd7000c"/>
+            </calculation>
+        </dataFields>
+        <series sequenceField="Index" stepType="values" id="df29cdaf-a568-4a81-ae49-8ba9cdc5c962">
+            <values source="Key.tree(departmentsList, departmentsList.collectUnique{it.employeesList.collectUnique{it.title}})" compile="false" id="dd1c21bb-5e63-4053-8fc9-2bc82d4ce80d"/>
+        </series>
+    </datalists>
+    <datalists entityCode="646" entityName="Title" version="1760" name="Title" created="2022-11-21T21:40:21.267-05:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Title">
+        <dataFields type="text" fieldCode="100" rawType="java.lang.String" keyField="true" indexed="true" name="Title" initialized="true" lastUpdated="2024-10-18T13:32:59.067+03:00" lastUpdatedBy="admin" id="Title"/>
+        <dataFields type="integer" fieldCode="101" rawType="java.lang.Long" name="Num Employees" initialized="true" lastUpdated="2024-10-18T13:32:59.067+03:00" lastUpdatedBy="admin" id="Num Employees">
+            <calculation id="b6c0db84-b293-43e1-b0e6-300f7b125694">
+                <expression source="employeesList.size()" codeBlock="false" id="91058d2d-d8f4-4e74-b204-c98e061e1a3d"/>
+            </calculation>
+        </dataFields>
+    </datalists>
+    <datalists entityCode="647" entityName="History" version="1760" config="true" name="History" description="" created="2023-07-06T15:06:40.772-04:00" createdBy="regional" lastUpdated="2024-10-29T14:57:13.754+02:00" lastUpdatedBy="admin" id="History">
+        <dataFields type="integer" format="0" fieldCode="100" rawType="java.lang.Long" keyField="true" sorted="true" name="Year" initialized="true" lastUpdated="2024-10-18T13:32:59.092+03:00" lastUpdatedBy="admin" id="Year">
+            <defaultValue source="Date.now()" codeBlock="false"/>
+        </dataFields>
+        <dataFields type="integer" fieldCode="101" rawType="java.lang.Long" name="Hired" initialized="true" lastUpdated="2024-10-18T13:32:59.096+03:00" lastUpdatedBy="admin" id="Hired">
+            <calculation>
+                <expression source="model.employeesList.count{it.hireDate.year==year}" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="102" rawType="java.lang.Long" name="Team Size" initialized="true" lastUpdated="2024-10-18T13:32:59.096+03:00" lastUpdatedBy="admin" id="Team Size">
+            <calculation>
+                <expression source="hired + keyPrior?.teamSize" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="currency" fieldCode="103" rawType="java.math.BigDecimal" name="Payroll" initialized="true" lastUpdated="2024-10-18T13:32:59.097+03:00" lastUpdatedBy="admin" id="Payroll">
+            <calculation>
+                <expression source="model.employeesList.findAll{it.hireDate.year==year}.sum{it.salary} + keyPrior?.payroll" compile="false" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <series sequenceField="Year" stepType="values">
+            <values source="
+[employeesList.min{it.hireDate}.hireDate.year..employeesList.max{it.hireDate}.hireDate.year]" compile="false"/>
+        </series>
+    </datalists>
+    <datalists entityCode="648" entityName="Goal" version="1760" name="Goal" description="" created="2023-11-08T18:02:52.722-05:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Goal">
+        <dataFields type="text" fieldCode="100" rawType="java.lang.String" keyField="true" indexed="true" name="Goal Name" initialized="true" lastUpdated="2024-10-18T13:32:59.076+03:00" lastUpdatedBy="admin" id="Goal Name"/>
+        <dataFields type="text" fieldCode="101" rawType="java.lang.String" name="Department" initialized="true" lastUpdated="2024-10-18T13:32:59.076+03:00" lastUpdatedBy="admin" id="Department">
+            <calculation>
+                <expression source="departments
+" codeBlock="true"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" fieldCode="102" rawType="java.lang.Long" name="Active Employees" initialized="true" lastUpdated="2024-10-18T13:32:59.076+03:00" lastUpdatedBy="admin" id="Active Employees">
+            <calculation>
+                <expression source="departments.numActiveEmp" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+    </datalists>
+    <datalists entityCode="649" entityName="State" version="1760" name="State" description="Extracted from Departments" created="2024-06-22T10:55:55.581-04:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="State">
+        <dataFields type="text" fieldCode="100" rawType="java.lang.String" keyField="true" indexed="true" name="State" initialized="true" lastUpdated="2024-10-18T13:32:59.067+03:00" lastUpdatedBy="admin" id="State"/>
+        <dataFields type="integer" fieldCode="101" rawType="java.lang.Long" name="# Departments" description="COUNT of field State" initialized="true" lastUpdated="2024-10-18T13:32:59.068+03:00" lastUpdatedBy="admin" id="# Departments">
+            <calculation>
+                <expression source="departmentsList.size()" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="integer" format="#,##0" fieldCode="102" rawType="java.lang.Long" name="NumActiveEmp" initialized="true" lastUpdated="2024-10-18T13:32:59.068+03:00" lastUpdatedBy="admin" id="NumActiveEmp">
+            <calculation>
+                <expression source="departmentsList.sum{it.numActiveEmp}" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <dataFields type="decimal" fieldCode="103" rawType="java.math.BigDecimal" name="Average Employees Per Department" initialized="true" lastUpdated="2024-10-18T13:32:59.068+03:00" lastUpdatedBy="admin" id="Average Employees Per Department">
+            <calculation>
+                <expression source="numActiveEmp / numDepartments" codeBlock="false"/>
+            </calculation>
+        </dataFields>
+        <series sequenceField="State" stepType="values">
+            <values source="departmentsList.collect{it.state?.state}"/>
+        </series>
+    </datalists>
+    <views allColumns="false" default="true" entityName="Title" version="1513" name="Title" description="Default view for list Title" created="2022-10-24T15:04:08.397-04:00" createdBy="regional" lastUpdated="2024-06-22T09:23:17.061-04:00" lastUpdatedBy="regional" id="Title">
+        <columns>Title</columns>
+        <columns>Num Employees</columns>
+    </views>
+    <views allColumns="false" default="true" entityName="Roles" version="1513" name="Roles" description="Default view for list Roles" created="2022-10-24T15:00:26.875-04:00" createdBy="regional" lastUpdated="2024-06-22T09:23:17.061-04:00" lastUpdatedBy="regional" id="Roles">
+        <columns>Index</columns>
+        <columns>Department</columns>
+        <columns>Role</columns>
+        <columns>Employees</columns>
+        <columns>Employees Ids</columns>
+        <columns>Role Count</columns>
+        <columns>Average Salary</columns>
+    </views>
+    <views allColumns="false" default="true" entityName="Departments" version="1562" publish="true" name="Departments" description="Default view for list Departments" created="2022-09-16T18:24:12.008-04:00" createdBy="regional" lastUpdated="2024-06-22T10:55:13.331-04:00" lastUpdatedBy="regional" id="Departments">
+        <columns>Code</columns>
+        <columns>Random Foo</columns>
+        <columns>Random</columns>
+        <columns>FooBar</columns>
+        <columns>NumActiveEmp</columns>
+        <columns>Location</columns>
+        <columns>State</columns>
+        <columns>DeptName</columns>
+        <columns>Company</columns>
+        <columns>Employees</columns>
+        <columns>DeptManager</columns>
+        <columns>Managers Tenure</columns>
+        <columns>Salary &lt; 5 years</columns>
+        <columns>Salary 5-10 years</columns>
+        <columns>Manager to Average Employee Salary Ratio</columns>
+        <columns>Goals</columns>
+        <columns>Titles</columns>
+        <columns>Title Average Salary</columns>
+        <columns>Salary Stats</columns>
+        <columns>Salary &gt; Manager Tenure</columns>
+        <columns>Salary &gt; 10 years</columns>
+        <columns>Onboard Decision</columns>
+        <columns>Want Field Here</columns>
+        <columns>sourceName</columns>
+        <columns>lineNumber</columns>
+    </views>
+    <views allColumns="false" default="true" entityName="Employees" version="1513" publish="true" name="Employees" description="Default view for list Employees" created="2022-09-16T18:11:27.123-04:00" createdBy="regional" lastUpdated="2024-06-22T09:23:17.061-04:00" lastUpdatedBy="regional" id="Employees">
+        <columns>Name</columns>
+        <columns>Employee Id</columns>
+        <columns>Company</columns>
+        <columns>Company Industry</columns>
+        <columns>Employment Status</columns>
+        <columns>Last Name</columns>
+        <columns>First Name</columns>
+        <columns>HireDate</columns>
+        <columns>Title</columns>
+        <columns>DeptCode</columns>
+        <columns>DeptLink</columns>
+        <columns>Department</columns>
+        <columns>Is Manager Old</columns>
+        <columns>Manager</columns>
+        <columns>Is Manager</columns>
+        <columns>Num Employees</columns>
+        <columns>Overpaid</columns>
+        <columns>Phone</columns>
+        <columns>eMail</columns>
+        <columns>YearsTenure</columns>
+        <columns>Salary Bin</columns>
+        <columns>sourceName</columns>
+        <columns>lineNumber</columns>
+        <columns>Onboarding Status</columns>
+        <columns>Salary</columns>
+    </views>
+    <views allColumns="false" default="true" defaultRowHeight="3" entityName="Company" version="1600" publish="true" name="Company" description="Default view for list Company" created="2022-09-16T18:16:59.491-04:00" createdBy="regional" lastUpdated="2024-06-26T12:38:25.182-04:00" lastUpdatedBy="regional" id="Company">
+        <columns>Company Name</columns>
+        <columns>Percent Crooks</columns>
+        <columns>Company Industry</columns>
+        <columns>Foo</columns>
+        <columns>Total Active Employees</columns>
+        <columns>Total Tenured Revenue</columns>
+        <columns>Top Managers Salary</columns>
+        <columns>Top Salary Vs Average</columns>
+        <columns>Top Salary Vs Top Tenure</columns>
+        <columns>Top Salary Vs Max</columns>
+    </views>
+    <views allColumns="true" default="true" modelView="true" entityName="Fin Fast Model 1 (3)" version="624" name="Fin Fast Model 1 (3)" description="Default view for list Fin Fast Model" position="0" created="2022-09-20T17:16:54.873-04:00" createdBy="regional" lastUpdated="2022-09-20T17:16:54.873-04:00" lastUpdatedBy="regional" id="Fin Fast Model 1 (3)"/>
+    <views allColumns="false" entityName="Employees" version="833" publish="true" name="Managers" created="2023-04-20T16:46:03.740-04:00" createdBy="regional" lastUpdated="2024-03-22T07:22:32.872-04:00" lastUpdatedBy="regional" id="Managers">
+        <columns>Name</columns>
+        <columns>Employee Id</columns>
+        <columns>Company Industry</columns>
+        <columns>Employment Status</columns>
+        <columns>Last Name</columns>
+        <columns>First Name</columns>
+        <columns>HireDate</columns>
+        <columns>Title</columns>
+        <columns>DeptCode</columns>
+        <columns>DeptLink</columns>
+        <columns>Department</columns>
+        <columns>Is Manager Old</columns>
+        <columns>Manager</columns>
+        <columns>Is Manager</columns>
+        <columns>Salary</columns>
+        <columns>Overpaid</columns>
+        <columns>Phone</columns>
+        <columns>eMail</columns>
+        <columns>YearsTenure</columns>
+        <columns>Salary Bin</columns>
+        <columns>sourceName</columns>
+        <columns>lineNumber</columns>
+    </views>
+    <views allColumns="false" default="true" entityName="History" version="1249" name="History" description="Default view for list History" created="2023-07-06T15:07:11.469-04:00" createdBy="regional" lastUpdated="2024-06-19T17:30:37.905-04:00" lastUpdatedBy="regional" id="History">
+        <columns>Year</columns>
+        <columns>Hired</columns>
+        <columns>Team Size</columns>
+        <columns>Payroll</columns>
+    </views>
+    <views allColumns="false" default="true" entityName="Goal" version="1109" name="Goal" description="Default view for list Goal" created="2023-11-08T18:03:11.645-05:00" createdBy="regional" lastUpdated="2024-06-12T08:18:43.469-04:00" lastUpdatedBy="regional" id="Goal">
+        <columns>Goal Name</columns>
+        <columns>Department</columns>
+        <columns>Active Employees</columns>
+    </views>
+    <views allColumns="false" default="true" entityName="State" version="1578" name="State" description="Default view for list State" created="2024-06-22T10:56:20.006-04:00" createdBy="regional" lastUpdated="2024-06-22T11:17:23.275-04:00" lastUpdatedBy="regional" id="State">
+        <columns>State</columns>
+        <columns># Departments</columns>
+        <columns>NumActiveEmp</columns>
+        <columns>Average Employees Per Department</columns>
+        <summaryType dataField="# Departments" factType="sum"/>
+        <summaryType dataField="NumActiveEmp" factType="sum"/>
+        <summaryType dataField="Average Employees Per Department" factType="mean"/>
+    </views>
+    <cubes dataSource="DATALIST:Employees" entityName="Employees" version="1378" publish="true" name="Employees Cube" description="" created="2024-06-19T23:04:52.411-04:00" createdBy="regional" lastUpdated="2024-06-19T23:05:58.249-04:00" lastUpdatedBy="regional" id="Employees Cube">
+        <dimensions>
+            <field type="text" fieldCode="128" rawType="java.lang.String" name="Company" position="3" initialized="true" lastUpdated="2023-09-03T14:19:13.000Z" lastUpdatedBy="regional" id="Company"/>
+        </dimensions>
+        <dimensions>
+            <field type="text" fieldCode="108" rawType="java.lang.String" allowNull="true" name="Department" position="12" initialized="true" lastUpdated="2023-08-11T01:43:33.000Z" lastUpdatedBy="regional" id="Department"/>
+        </dimensions>
+        <facts id="countid">
+            <field type="integer" name="id" id="id"/>
+        </facts>
+        <facts factType="mean" id="meanSalary">
+            <field type="currency" format="$#,##0.00" name="Salary" id="Salary"/>
+        </facts>
+    </cubes>
+    <rulebases entityName="Employees" version="1760" name="Employees Rulebase" created="2022-09-20T17:19:55.739-04:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Employees Rulebase">
+        <rules resultText="You are a damn crook" ruleType="action" name="You're a thief" icon="snowboarding" created="2022-09-20T17:24:54.807-04:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="You're a thief">
+            <triggerClause clauseType="contains" layout="{&quot;name&quot;:&quot;c84d9279-1a9c-448a-8131-005fa2c5b1cb&quot;,&quot;selected&quot;:false,&quot;expressionClause&quot;:{&quot;name&quot;:&quot;9108ab80-ac26-4b44-b1f6-50b8c400d3f4&quot;,&quot;field&quot;:&quot;companyIndustry&quot;,&quot;comparisonOperator&quot;:&quot;Contains (==~)&quot;,&quot;value&quot;:&quot;Stealing&quot;,&quot;selected&quot;:false,&quot;fieldDisplay&quot;:&quot;Company Industry&quot;,&quot;translatedExpression&quot;:{&quot;clauseType&quot;:&quot;CONTAINS&quot;,&quot;clausePart&quot;:[{&quot;clauseType&quot;:&quot;FIELD&quot;,&quot;field&quot;:{&quot;fieldName&quot;:&quot;companyIndustry&quot;,&quot;fieldDisplay&quot;:&quot;Company Industry&quot;}},{&quot;clauseType&quot;:&quot;LITERAL&quot;,&quot;literal&quot;:[{&quot;scenario&quot;:null,&quot;value&quot;:&quot;Stealing&quot;}]}]}}}" id="70dfe762-5037-45b8-ab33-d51cee65bd48">
+                <clausePart clauseType="field" id="721b2f81-1d15-4b8b-a4e0-3febc5b3ef58">
+                    <field fieldName="companyIndustry" fieldDisplay="Company Industry" id="d08f847e-0cd1-4e2c-807b-1952c5640f7e"/>
+                </clausePart>
+                <clausePart clauseType="literal" id="9760a44e-9628-40e9-a530-2924757571fe">
+                    <literal value="Stealing" id="72e06de0-47c6-4029-9d0e-65fa9499db44"/>
+                </clausePart>
+            </triggerClause>
+        </rules>
+        <rules resultText="The quick brown fox jumped over the lazy dog - this rule is broken" ruleType="info" name="Broken rule" icon="adb" created="2023-04-17T20:44:15.000Z" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Broken rule">
+            <triggerClause clauseType="expression" layout="{&quot;name&quot;:&quot;91a36917-5c55-4d9e-8d93-a76892750ef0&quot;,&quot;selected&quot;:false,&quot;expressionClause&quot;:{&quot;name&quot;:&quot;f9a65767-f101-4146-9361-b5e9fa933a89&quot;,&quot;field&quot;:null,&quot;comparisonOperator&quot;:null,&quot;value&quot;:null,&quot;selected&quot;:false,&quot;translatedExpression&quot;:{&quot;clauseType&quot;:&quot;EXPRESSION&quot;,&quot;expression&quot;:{&quot;source&quot;:&quot;isManager &amp;&amp; salary &gt; 100000&quot;}}}}" id="91a36917-5c55-4d9e-8d93-a76892750ef0">
+                <expression methodName="triggerClauseBlock_BrokenRule_0" returnType="boolean" source="isManager &amp;&amp; salary &gt; 100000" codeBlock="false"/>
+            </triggerClause>
+        </rules>
+        <rules resultText="This is a silly rule" ruleType="validation" name="Silly rule" icon="add_reaction" created="2023-04-17T20:50:02.000Z" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Silly rule">
+            <triggerClause clauseType="contains" layout="{&quot;name&quot;:&quot;c460c0d2-2f4a-40f7-ab05-18e93e197d95&quot;,&quot;selected&quot;:false,&quot;expressionClause&quot;:{&quot;name&quot;:&quot;525be829-c73a-4ec0-8130-0d17c607f45e&quot;,&quot;field&quot;:&quot;eMail&quot;,&quot;comparisonOperator&quot;:&quot;Contains (==~)&quot;,&quot;value&quot;:&quot;ee&quot;,&quot;selected&quot;:false,&quot;fieldDisplay&quot;:&quot;eMail&quot;,&quot;fieldType&quot;:&quot;TEXT&quot;,&quot;translatedExpression&quot;:{&quot;clauseType&quot;:&quot;CONTAINS&quot;,&quot;clausePart&quot;:[{&quot;id&quot;:&quot;07c4bdf0-58e4-4d91-bae6-a69de676ef33&quot;,&quot;clauseType&quot;:&quot;FIELD&quot;,&quot;field&quot;:{&quot;fieldName&quot;:&quot;eMail&quot;,&quot;fieldDisplay&quot;:&quot;eMail&quot;,&quot;fieldType&quot;:&quot;TEXT&quot;}},{&quot;id&quot;:&quot;f71508bb-1af9-4856-97e1-99cf6d45579c&quot;,&quot;clauseType&quot;:&quot;LITERAL&quot;,&quot;literal&quot;:[{&quot;scenario&quot;:null,&quot;value&quot;:&quot;ee&quot;}]}]}}}" id="c460c0d2-2f4a-40f7-ab05-18e93e197d95">
+                <clausePart clauseType="field" id="07c4bdf0-58e4-4d91-bae6-a69de676ef33">
+                    <field fieldName="eMail" fieldDisplay="eMail" fieldType="text"/>
+                </clausePart>
+                <clausePart clauseType="literal" id="f71508bb-1af9-4856-97e1-99cf6d45579c">
+                    <literal value="ee"/>
+                </clausePart>
+            </triggerClause>
+        </rules>
+        <rules resultText="This rule errors if no team" ruleType="info" name="Rule that errors out" icon="broken_image" created="2024-05-21T15:04:01.000Z" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Rule that errors out">
+            <triggerClause clauseType="and" layout="{&quot;name&quot;:&quot;be904e55-1895-4988-8ebe-3be3b0d09e2c&quot;,&quot;level&quot;:1}" id="be904e55-1895-4988-8ebe-3be3b0d09e2c">
+                <clausePart clauseType="expression" layout="{&quot;name&quot;:&quot;a7de8631-d5b2-4b3d-87e4-4ee40e995df9&quot;,&quot;selected&quot;:false,&quot;expressionClause&quot;:{&quot;name&quot;:&quot;6d3c3c98-3710-4cdc-911c-4e72e7cdb23e&quot;,&quot;field&quot;:null,&quot;comparisonOperator&quot;:null,&quot;value&quot;:null,&quot;selected&quot;:false,&quot;fieldDisplay&quot;:null,&quot;fieldType&quot;:null,&quot;translatedExpression&quot;:{&quot;clauseType&quot;:&quot;EXPRESSION&quot;,&quot;expression&quot;:{&quot;source&quot;:&quot;false&quot;}}}}" id="a7de8631-d5b2-4b3d-87e4-4ee40e995df9">
+                    <expression methodName="triggerClauseBlock_RuleThatErrorsOut_0_1" source="false" codeBlock="false"/>
+                </clausePart>
+                <clausePart clauseType="expression" layout="{&quot;name&quot;:&quot;7e018ada-432e-4f7b-85f0-6ac333d21b2b&quot;,&quot;selected&quot;:false,&quot;expressionClause&quot;:{&quot;name&quot;:&quot;82f7d790-efbb-46ab-8e1c-55b806ef7420&quot;,&quot;field&quot;:&quot;numEmployees&quot;,&quot;comparisonOperator&quot;:null,&quot;value&quot;:null,&quot;selected&quot;:false,&quot;fieldDisplay&quot;:&quot;Num Employees&quot;,&quot;fieldType&quot;:&quot;INTEGER&quot;,&quot;translatedExpression&quot;:{&quot;clauseType&quot;:&quot;EXPRESSION&quot;,&quot;expression&quot;:{&quot;source&quot;:&quot;1 / numEmployees &lt; 1&quot;}}}}" id="7e018ada-432e-4f7b-85f0-6ac333d21b2b">
+                    <expression methodName="triggerClauseBlock_RuleThatErrorsOut_0_2" source="1 / numEmployees &lt; 1" codeBlock="false"/>
+                </clausePart>
+            </triggerClause>
+        </rules>
+    </rulebases>
+    <rulebases entityName="Departments" version="1760" name="Departments Rulebase" created="2023-04-02T14:42:45.796-04:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Departments Rulebase">
+        <rules resultText="The department manager is overpaid.  Manager to employee comp ratio  ${managerToAverageEmployeeSalaryRatio} - DUH" ruleType="info" name="Manager is overpaid" icon="castle" created="2023-04-02T14:59:27.193-04:00" createdBy="regional" lastUpdated="2024-10-18T13:32:58.431+03:00" lastUpdatedBy="admin" id="Manager is overpaid">
+            <triggerClause clauseType="greater_than" layout="{&quot;name&quot;:&quot;ba743b2d-0abb-4d80-b7ca-975a9fd69132&quot;,&quot;selected&quot;:false,&quot;expressionClause&quot;:{&quot;name&quot;:&quot;f35ec5fd-7932-48ec-b3c8-8233148fe689&quot;,&quot;field&quot;:&quot;managerToAverageEmployeeSalaryRatio&quot;,&quot;comparisonOperator&quot;:&quot;Greater Than (&gt;)&quot;,&quot;value&quot;:&quot;1.3&quot;,&quot;selected&quot;:false,&quot;fieldDisplay&quot;:&quot;Manager to Average Employee Salary Ratio&quot;,&quot;translatedExpression&quot;:{&quot;clauseType&quot;:&quot;GREATER_THAN&quot;,&quot;clausePart&quot;:[{&quot;id&quot;:&quot;83c6d953-ad54-43c6-83ff-5278a51397ed&quot;,&quot;clauseType&quot;:&quot;FIELD&quot;,&quot;field&quot;:{&quot;fieldName&quot;:&quot;managerToAverageEmployeeSalaryRatio&quot;,&quot;fieldDisplay&quot;:&quot;Manager to Average Employee Salary Ratio&quot;}},{&quot;id&quot;:&quot;98aaee19-e9a4-4e59-8e97-10ccd7ac7ddf&quot;,&quot;clauseType&quot;:&quot;LITERAL&quot;,&quot;literal&quot;:[{&quot;scenario&quot;:null,&quot;value&quot;:&quot;1.3&quot;}]}]}}}" id="db7ba26a-82c4-4bce-b113-fca0e672422e">
+                <clausePart clauseType="field" id="83c6d953-ad54-43c6-83ff-5278a51397ed">
+                    <field fieldName="managerToAverageEmployeeSalaryRatio" fieldDisplay="Manager to Average Employee Salary Ratio"/>
+                </clausePart>
+                <clausePart clauseType="literal" id="98aaee19-e9a4-4e59-8e97-10ccd7ac7ddf">
+                    <literal value="1.3"/>
+                </clausePart>
+            </triggerClause>
+        </rules>
+    </rulebases>
+    <scripts name="Debug" folder="" scriptType="groovy" id="SCRIPT:Debug">
+        <body>
+            
+            companyList.companyIndustry.debugTrace=true
+employeesList.companyIndustry.debugTrace=true
+employeesList.ruleResults.debugTrace=true
+employeesList._rule_you_reAThief.debugTrace=true
+
+        
+        </body>
+    </scripts>
+    <scripts name="Undebug" folder="" scriptType="groovy" id="SCRIPT:Undebug">
+        <body>
+            
+            companyList.companyIndustry.debugTrace=false
+companyList.totalActiveEmployees.debugTrace=false
+departmentsList.numActiveEmp.debugTrace=false
+employeesList.companyIndustry.debugTrace=false
+employeesList.employmentStatus.debugTrace=false
+
+        
+        </body>
+    </scripts>
+    <scripts name="test" folder="" scriptType="groovy" id="SCRIPT:test">
+        <body>
+            
+            employeesList[2].clearCache()
+employeesList[2].department
+        
+        </body>
+    </scripts>
+    <scripts name="Debug Tenure" folder="" scriptType="groovy" id="SCRIPT:Debug Tenure">
+        <body>
+            
+            employeesList.hireDate.debugTrace=true
+employeesList.yearsTenure.debugTrace=true
+departmentsList.salaryGreaterManagerTenure.debugTrace=true
+companyList.totalTenuredRevenue.debugTrace=true
+departmentsList.managersTenure.debugTrace=true
+departmentsList.deptManager
+
+        
+        </body>
+    </scripts>
+    <scripts name="Test Tenure" folder="" scriptType="groovy" id="SCRIPT:Test Tenure">
+        <body>
+            
+            companyList[0].totalTenuredRevenue
+        
+        </body>
+    </scripts>
+    <scripts name="Trigger Tenure" folder="" scriptType="groovy" id="SCRIPT:Trigger Tenure">
+        <body>
+            
+            employeesList.find{it.name=="Vogt, Dianne"}.hireDate = "2012-06-01"
+        
+        </body>
+    </scripts>
+    <scripts name="Debug Paul" folder="" scriptType="groovy" id="SCRIPT:Debug Paul"/>
+    <scripts name="DeptDebug" folder="" scriptType="groovy" id="SCRIPT:DeptDebug">
+        <body>
+            
+            companyList.companyIndustry.debugTrace=true
+companyList.totalActiveEmployees.debugTrace=true
+companyList.departmentsList.debugTrace=true
+departmentsList.numActiveEmp.debugTrace=true
+departmentsList.employeesList.debugTrace=true
+employeesList.companyIndustry.debugTrace=true
+employeesList.employmentStatus.debugTrace=true
+employeesList.deptLink.debugTrace=true
+departmentsList.company.debugTrace=true
+companyList.companyName.debugTrace=true
+departmentsList.company.debugTrace=true
+
+        
+        </body>
+    </scripts>
+    <scripts name="Test Script Recovery" folder="" scriptType="groovy" autoRun="periodic" interval="10000" id="SCRIPT:Test Script Recovery">
+        <body>def h = historyList.create().add()
+employeesList.each{
+  def ratio = it.salary; // it.numEmployees
+}
+h.completed = Date.now()</body>
+    </scripts>
+    <extra name="ModelCanvasCoordinates" description="Coordinates for ModelCanvasCoordinates" id="ModelCanvasCoordinates">
+        <body>{"DATALIST:Company":{"x":-723,"y":-134},"DATALIST:Department":{"x":-463,"y":-32},"DATALIST:Employees":{"x":-103,"y":150},"CONNECTOR:Employees":{"x":56,"y":254},"CONNECTOR:Departments":{"x":-608,"y":151},"DATALIST:Departments":{"x":-602,"y":49},"RULEBASE:Employees Rulebase":{"x":19,"y":124},"DATALIST:Roles":{"x":-223,"y":-163},"DATALIST:Title":{"x":-34,"y":-191},"RULEBASE:Departments Rulebase":{"x":-480,"y":222},"DATALIST:History":{"x":77,"y":-60},"DATALIST:Goal":{"x":-844,"y":69},"CUBE:Employees Cube":{"x":-78,"y":272},"CHART:Employees Chart":{"x":-41,"y":76},"DATALIST:State":{"x":-820,"y":220}}</body>
+    </extra>
+    <extra name="DependencyGraphCoordinates" description="Coordinates for DependencyGraphCoordinates" id="DependencyGraphCoordinates">
+        <body>{"Departments.salaryGreater10Years":{"x":1671,"y":283},"Fin Fast Model.cubepivot_company_cube":{"x":1569,"y":-157},"Company.totalActiveEmployees":{"x":965,"y":336},"Fin Fast Model.view_Company_company":{"x":1592,"y":24},"Fin Fast Model.companyList":{"x":1680,"y":-88},"Departments.salaryGreaterManagerTenure":{"x":995,"y":229},"Departments.departmentsView":{"x":987,"y":373},"Departments.managersTenure":{"x":1194,"y":305},"Employees.yearsTenure":{"x":986,"y":243},"Departments.deptManager":{"x":1392,"y":373},"Employees.hireDate":{"x":1213,"y":338},"Employees.employeesView":{"x":961,"y":235},"Employees.deptCode":{"x":1195,"y":251},"Fin Fast Model.connector_Employees":{"x":1842,"y":464},"Roles.rolesView":{"x":996,"y":354},"Roles.roleCount":{"x":1200,"y":264},"Roles.employees":{"x":1419,"y":301},"Roles.averageSalary":{"x":1162,"y":366},"Employees.department":{"x":1813,"y":228},"Roles.role":{"x":1416,"y":91},"Roles.department":{"x":1574,"y":151},"Departments.deptName":{"x":1254,"y":192},"Title.employeesList":{"x":1521,"y":493},"Title.numEmployees":{"x":1247,"y":430},"Title.title":{"x":1520,"y":265},"Departments.salaryLess5Years":{"x":1155,"y":154},"Departments.salary5_10Years":{"x":1180,"y":118},"Fin Fast Model.rulebase_Employees_employeesRulebase":{"x":965,"y":201},"Fin Fast Model.rolesSeries":{"x":1648,"y":1087},"Employees.overpaid":{"x":1021,"y":202},"Employees.salaryBin":{"x":1329,"y":98},"Departments.location":{"x":1454,"y":241},"Departments.sourceName":{"x":1409,"y":-14},"Departments.lineNumber":{"x":1498,"y":96},"Fin Fast Model.rolesList":{"x":1511,"y":1105},"Employees.location":{"x":790,"y":364},"Employees.lineNumber":{"x":1450,"y":408},"Company.totalTenuredRevenue":{"x":1319,"y":756},"Employees.isManagerOld":{"x":1042,"y":457},"Employees.salary":{"x":1381,"y":221},"Employees.isManager":{"x":1013,"y":1679},"Employees.title":{"x":1150,"y":274},"Employees.phone":{"x":1455,"y":143},"Employees.manager":{"x":1355,"y":418},"Employees.eMail":{"x":1498,"y":443},"Employees.sourceName":{"x":1273,"y":134},"Employees.lastName":{"x":1599,"y":134},"Employees.firstName":{"x":1307,"y":372},"Fin Fast Model.departmentsList":{"x":1785,"y":1067},"Fin Fast Model.employeesList":{"x":1049,"y":856},"Employees.departmentsList":{"x":1139,"y":1692},"Roles.index":{"x":1647,"y":287},"Employees.companyIndustry":{"x":912,"y":337},"Company.companyIndustry":{"x":1132,"y":340},"Employees.deptLink":{"x":1171,"y":264},"Departments.company":{"x":1187,"y":387},"Company.percentCrooks":{"x":1074,"y":436},"Employees.ruleResults":{"x":868,"y":346},"Departments.numActiveEmp":{"x":1262,"y":278},"Company.departmentsList":{"x":1239,"y":568},"Departments.employeesList":{"x":1502,"y":418},"Employees._rule_brokenRule":{"x":913,"y":132},"Employees._rule_you_reAThief":{"x":1034,"y":179},"Employees._rule_sillyRule":{"x":1084,"y":296},"Employees.employmentStatus":{"x":1433,"y":115},"Company.companyName":{"x":1458,"y":709},"Departments.code":{"x":1772,"y":578},"Fin Fast Model.connector_Departments":{"x":1504,"y":234}}</body>
+    </extra>
+    <extractions extractFromDatalist="Departments" extractToDatalist="State">
+        <dimensions>State</dimensions>
+        <summaryFields fieldName="# Departments" fromField="State" action="count"/>
+    </extractions>
+</ns3:modelConfig>
