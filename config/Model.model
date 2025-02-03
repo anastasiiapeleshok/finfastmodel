@@ -346,6 +346,7 @@
             <values source="departmentsList.collect{it.state?.state}"/>
         </series>
     </datalists>
+    <datalists entityCode="650" entityName="Datalist1" version="1765" name="Datalist1" description="" created="2025-02-03T11:33:50.991+02:00" createdBy="admin" lastUpdated="2025-02-03T11:33:50.991+02:00" lastUpdatedBy="admin" id="Datalist1"/>
     <views allColumns="false" default="true" entityName="Title" version="1513" name="Title" description="Default view for list Title" created="2022-10-24T15:04:08.397-04:00" createdBy="regional" lastUpdated="2024-06-22T09:23:17.061-04:00" lastUpdatedBy="regional" id="Title">
         <columns>Title</columns>
         <columns>Num Employees</columns>
@@ -470,6 +471,7 @@
         <summaryType dataField="NumActiveEmp" factType="sum"/>
         <summaryType dataField="Average Employees Per Department" factType="mean"/>
     </views>
+    <views allColumns="true" default="true" entityName="Datalist1" name="Datalist1" description="Default view for list Datalist1" id="Datalist1"/>
     <cubes dataSource="DATALIST:Employees" entityName="Employees" version="1378" publish="true" name="Employees Cube" description="" created="2024-06-19T23:04:52.411-04:00" createdBy="regional" lastUpdated="2024-06-19T23:05:58.249-04:00" lastUpdatedBy="regional" id="Employees Cube">
         <dimensions>
             <field type="text" fieldCode="128" rawType="java.lang.String" name="Company" position="3" initialized="true" lastUpdated="2023-09-03T14:19:13.000Z" lastUpdatedBy="regional" id="Company"/>
